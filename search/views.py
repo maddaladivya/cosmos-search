@@ -6,8 +6,8 @@ from random import shuffle
 from bs4 import BeautifulSoup
 import requests
 
-head = '<!DOCTYPE html><html><head><meta charset="utf-8"><title>Code</title><link rel="alternate stylesheet" type="text/css" href="resource://content-accessible/plaintext.css" title="Wrap Long Lines"></head><body><pre>'
-tail = '</pre></body></html>'
+head = """{% extends 'cosmos/header.html' %}{% block head %}<title>"{{ query }}" | cosmos-search</title><link rel="alternate stylesheet" type="text/css" href="resource://content-accessible/plaintext.css" title="Wrap Long Lines">{% endblock %}{% block body %}<pre>"""
+tail = "</pre> {% endblock %}"
 # Create your views here.
 def index(request):
     return render(request, 'cosmos/index.html')
@@ -49,7 +49,6 @@ def query(request):
             if filtered_v:
                 path = k
                 k = k.split('/')
-                print path
                 if len(k) == 2:
                     k.insert(len(k)-1, "src")
                 else:
