@@ -6,7 +6,8 @@ from random import shuffle
 from bs4 import BeautifulSoup
 import requests
 
-
+head = '<!DOCTYPE html><html><head><meta charset="utf-8"><title>Code</title><link rel="alternate stylesheet" type="text/css" href="resource://content-accessible/plaintext.css" title="Wrap Long Lines"></head><body><pre>'
+tail = '</pre></body></html>'
 # Create your views here.
 def index(request):
     return render(request, 'cosmos/index.html')
@@ -49,7 +50,10 @@ def query(request):
                 path = k
                 k = k.split('/')
                 print path
-                k.insert(len(k)-2, "scr")
+                if len(k) == 2:
+                    k.insert(len(k)-1, "src")
+                else:
+                    k.insert(len(k)-2, "src")
                 p = ''
                 for i in range(0,len(k)):
                     p = p + k[i] + '/'
@@ -90,10 +94,7 @@ def display(request):
         print display
     r = requests.get(display)
     pre = BeautifulSoup(r.text, 'html.parser')
-    print "pre:"
-    print pre
     file = open("search/templates/cosmos/data.html","w+")
-    file.write(pre.text.encode('utf-8').strip())
+    file.write(head + pre.text + tail)
     file.close()
-    print "FUCK"
     return render(request, 'cosmos/data.html',{})
