@@ -90,7 +90,6 @@ def subsq(a, b, m, n):
 def display(request):
     if request.method == 'POST':
         display = request.POST.get('path')
-        print display
     r = requests.get(display)
     pre = BeautifulSoup(r.text, 'html.parser')
     file = open("search/templates/cosmos/data.html","w+")
