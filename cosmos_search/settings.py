@@ -36,6 +36,8 @@ COSMOS_PATH = 'cosmos/code/'
 
 METADATA_JSON = 'metadata.json'
 
+TAGS_JSON = 'tags.json'
+
 # Application definition
 
 INSTALLED_APPS = [

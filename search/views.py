@@ -6,11 +6,24 @@ from random import shuffle
 from bs4 import BeautifulSoup
 import requests
 
+
 head = """{% extends 'cosmos/header.html' %}{% block head %}<title>"{{ query }}" | cosmos-search</title><link rel="alternate stylesheet" type="text/css" href="resource://content-accessible/plaintext.css" title="Wrap Long Lines">{% endblock %}{% block body %}<pre>"""
 tail = "</pre> {% endblock %}"
-# Create your views here.
+
+# Create your views here
+
+# To prefill the searchbar
+def searchbar():
+    jsonFile = open('tags.json', 'r')
+    data = json.load(jsonFile)
+    algo_list = data['tags']
+    r_no = random.randint(0,len(algo_list))
+    algo_tag = algo_list[r_no]
+    return algo_tag
+
 def index(request):
-    return render(request, 'cosmos/index.html')
+    algo_tag = searchbar()
+    return render(request,'cosmos/index.html',{'algo_name':algo_tag})
 
 
 # Handlers for error pages
@@ -49,14 +62,7 @@ def query(request):
             if filtered_v:
                 path = k
                 k = k.split('/')
-                if len(k) == 2:
-                    k.insert(len(k)-1, "src")
-                else:
-                    k.insert(len(k)-2, "src")
-                p = ''
-                for i in range(0,len(k)):
-                    p = p + k[i] + '/'
-                ans.append({'path': p, 'dirs': k, 'files': filtered_v})
+                ans.append({'path': path, 'dirs': k, 'files': filtered_v})
                 if len(k) == 2:
                     d = k[len(k)-2] + '/'
                 else:
