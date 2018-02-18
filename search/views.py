@@ -4,11 +4,6 @@ import json
 import random
 from random import shuffle
 import requests
-
-
-head = """{% extends 'cosmos/header.html' %}{% block head %}<title>"{{ query }}" | cosmos-search</title>{% endblock %}{% block body %}<pre>"""
-tail = "</pre> {% endblock %}"
-
 # Create your views here
 
 # To prefill the searchbar
