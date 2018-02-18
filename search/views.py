@@ -3,11 +3,10 @@ from django.conf import settings
 import json
 import random
 from random import shuffle
-from bs4 import BeautifulSoup
 import requests
 
 
-head = """{% extends 'cosmos/header.html' %}{% block head %}<title>"{{ query }}" | cosmos-search</title><link rel="alternate stylesheet" type="text/css" href="resource://content-accessible/plaintext.css" title="Wrap Long Lines">{% endblock %}{% block body %}<pre>"""
+head = """{% extends 'cosmos/header.html' %}{% block head %}<title>"{{ query }}" | cosmos-search</title>{% endblock %}{% block body %}<pre>"""
 tail = "</pre> {% endblock %}"
 
 # Create your views here
@@ -97,8 +96,4 @@ def display(request):
     if request.method == 'POST':
         display = request.POST.get('path')
     r = requests.get(display)
-    pre = BeautifulSoup(r.text, 'html.parser')
-    file = open("search/templates/cosmos/data.html","w+")
-    file.write(head + pre.text + tail)
-    file.close()
-    return render(request, 'cosmos/data.html',{})
+    return render(request, 'cosmos/data.html',{'code':r.text})
