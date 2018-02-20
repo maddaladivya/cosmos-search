@@ -25,11 +25,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-<<<<<<< HEAD
-DEBUG = True
-=======
+
 DEBUG = config('DEBUG', cast=bool)
->>>>>>> 8beca77bb62343eb17374468a90791176055fb71
+
 
 ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv())
 
@@ -136,8 +134,3 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
-<<<<<<< HEAD
-=======
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-
->>>>>>> 8beca77bb62343eb17374468a90791176055fb71

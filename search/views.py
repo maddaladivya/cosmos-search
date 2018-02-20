@@ -3,7 +3,6 @@ from django.conf import settings
 import json
 import random
 from random import shuffle
-from bs4 import BeautifulSoup
 import requests
 
 # Create your views here
@@ -93,9 +92,5 @@ def subsq(a, b, m, n):
 def display(request):
     if request.method == 'POST':
         display = request.POST.get('path')
-        print display
-    r = requests.get("https://raw.githubusercontent.com/OpenGenus/cosmos/master/code/artificial_intelligence/src/DBSCAN_Clustering/dbscan.py")
-    pre = BeautifulSoup(r.text, 'html.parser')
-    print "pre:"
-    print pre
-    return render(request, 'cosmos/data.html',{'code':pre.text})
+    r = requests.get(display)
+    return render(request, 'cosmos/data.html',{'code':r.text})
