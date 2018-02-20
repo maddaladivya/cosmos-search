@@ -4,7 +4,6 @@ import json
 import random
 from random import shuffle
 import requests
-
 # Create your views here
 
 # To prefill the searchbar
@@ -15,7 +14,6 @@ def searchbar():
     r_no = random.randint(0,len(algo_list))
     algo_tag = algo_list[r_no]
     return algo_tag
-
 
 def index(request):
     algo_tag = searchbar()
