@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 
 import os
 
+from decouple import config, Csv
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -20,21 +22,27 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'groe@_2fh_a68s=kbjdb1$zy3jut%2%*)cg^ji0qq_*&a*d-r_'
+SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
+<<<<<<< HEAD
 DEBUG = True
+=======
+DEBUG = config('DEBUG', cast=bool)
+>>>>>>> 8beca77bb62343eb17374468a90791176055fb71
 
-ALLOWED_HOSTS = ['search.opengenus.org', 'localhost']
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv())
 
 # OpenGenus specific
-GITHUB_WEBHOOK_SECRET = b'b8049cbcf55b2ee998c9be302220064757421f85'
+GITHUB_WEBHOOK_SECRET = config('GITHUB_WEBHOOK_SECRET', cast=lambda v: v.encode('UTF-8'))
 
 COSMOS_LINK = 'https://github.com/OpenGenus/cosmos.git'
 
 COSMOS_PATH = 'cosmos/code/'
 
 METADATA_JSON = 'metadata.json'
+
+TAGS_JSON = 'tags.json'
 
 # Application definition
 
@@ -128,3 +136,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
+<<<<<<< HEAD
+=======
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+>>>>>>> 8beca77bb62343eb17374468a90791176055fb71
