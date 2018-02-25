@@ -3,7 +3,7 @@ from django.conf import settings
 import json
 import random
 from random import shuffle
-
+import requests
 # Create your views here
 
 # To prefill the searchbar
@@ -87,3 +87,8 @@ def subsq(a, b, m, n):
         return subsq(a, b, m - 1, n - 1)
     # If last characters are not matching
     return subsq(a, b, m, n - 1)
+
+def display(request):
+    display = request.GET['path']
+    r = requests.get(display)
+    return render(request, 'cosmos/data.html',{'code':r.text})

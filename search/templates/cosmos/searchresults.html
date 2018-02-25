@@ -23,11 +23,14 @@
             <button class="btn btn-secondary dropdown-toggle" type="button" id="soln" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         Solutions
       </button>
-            <div class="dropdown-menu" aria-labelledby="soln">
-                {% for file in entry.files %}
-                <a href="https://github.com/OpenGenus/cosmos/blob/master/code/{{entry.path}}/{{file}}" target="_blank" class="dropdown-item">{{file}}</a> {% endfor %}
-            </div>
-        </div>
+      <div class="dropdown-menu" aria-labelledby="soln">
+          {% for file in entry.files %}
+            <form method="GET" action="/display/">
+              {% csrf_token %}
+              <button type="submit" name = "path" value = "https://raw.githubusercontent.com/OpenGenus/cosmos/master/code/{{entry.path}}/{{file}}" target="_blank" class="dropdown-item">{{file}}</button>
+            </form>
+          {% endfor %}
+      </div>
     </div>
 </div>
 <br> {% endfor %}
