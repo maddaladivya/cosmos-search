@@ -15,7 +15,6 @@ def searchbar():
     algo_tag = algo_list[r_no]
     return algo_tag
 
-
 def index(request):
     algo_tag = searchbar()
     return render(request,'cosmos/index.html',{'algo_name':algo_tag})
@@ -89,6 +88,11 @@ def subsq(a, b, m, n):
     return subsq(a, b, m, n - 1)
 
 def display(request):
+<<<<<<< HEAD
     display = request.GET['path']
+=======
+    if request.method == 'POST':
+        display = request.POST.get('path')
+>>>>>>> e192933e7d961b2b8e7b2332957921f1c674eb13
     r = requests.get(display)
     return render(request, 'cosmos/data.html',{'code':r.text})
